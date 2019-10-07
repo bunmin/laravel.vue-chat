@@ -4,8 +4,8 @@
        <div class="col-8">
            <div class="card card-default">
                <div class="card-header">Messages</div>
-               <div class="card-body p-0">
-                   <ul class="list-unstyled" style="height:300px; overflow-y:scroll" v-chat-scroll>
+               <div class="card-body p-0" id="message-box" style="height:300px; overflow-y:scroll">
+                   <ul class="list-unstyled" >
                        <li class="p-2" v-for="(message, index) in messages" :key="index" >
                            <strong>{{ message.user.name }}</strong>
                            {{ message.message }}
@@ -56,6 +56,10 @@
             }
         },
 
+        mounted () {
+            this.scrollThis(1000);
+        },
+
         created() {
             this.fetchMessages();
 
@@ -81,7 +85,7 @@
 
                     this.typingTimer = setTimeout(() => {
                         this.activeUser = false;
-                    }, 3000)
+                    }, 1500)
                 })
 
         },
@@ -100,6 +104,8 @@
                     message: this.newMessage
                 });
 
+                this.scrollThis(500);
+
                 axios.post('messages', {message: this.newMessage});
 
                 this.newMessage = '';
@@ -108,6 +114,14 @@
             sendTypingEvent() {
                 Echo.join('chat')
                     .whisper('typing', this.user);
+            },
+
+            scrollThis (time) {
+                setTimeout(function(){
+                    var container = document.getElementById("message-box");
+                    // console.log(container.scrollHeight);
+                    container.scrollTop = container.scrollHeight;
+                },time)
             }
         }
     }

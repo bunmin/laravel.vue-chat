@@ -59017,6 +59017,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             typingTimer: false
         };
     },
+    mounted: function mounted() {
+        this.scrollThis(1000);
+    },
     created: function created() {
         var _this = this;
 
@@ -59041,7 +59044,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             _this.typingTimer = setTimeout(function () {
                 _this.activeUser = false;
-            }, 3000);
+            }, 1500);
         });
     },
 
@@ -59061,12 +59064,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: this.newMessage
             });
 
+            this.scrollThis(500);
+
             axios.post('messages', { message: this.newMessage });
 
             this.newMessage = '';
         },
         sendTypingEvent: function sendTypingEvent() {
             Echo.join('chat').whisper('typing', this.user);
+        },
+        scrollThis: function scrollThis(time) {
+            setTimeout(function () {
+                var container = document.getElementById("message-box");
+                // console.log(container.scrollHeight);
+                container.scrollTop = container.scrollHeight;
+            }, time);
         }
     }
 });
@@ -59084,27 +59096,31 @@ var render = function() {
       _c("div", { staticClass: "card card-default" }, [
         _c("div", { staticClass: "card-header" }, [_vm._v("Messages")]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body p-0" }, [
-          _c(
-            "ul",
-            {
-              directives: [{ name: "chat-scroll", rawName: "v-chat-scroll" }],
-              staticClass: "list-unstyled",
-              staticStyle: { height: "300px", "overflow-y": "scroll" }
-            },
-            _vm._l(_vm.messages, function(message, index) {
-              return _c("li", { key: index, staticClass: "p-2" }, [
-                _c("strong", [_vm._v(_vm._s(message.user.name))]),
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(message.message) +
-                    "\n                    "
-                )
-              ])
-            }),
-            0
-          )
-        ]),
+        _c(
+          "div",
+          {
+            staticClass: "card-body p-0",
+            staticStyle: { height: "300px", "overflow-y": "scroll" },
+            attrs: { id: "message-box" }
+          },
+          [
+            _c(
+              "ul",
+              { staticClass: "list-unstyled" },
+              _vm._l(_vm.messages, function(message, index) {
+                return _c("li", { key: index, staticClass: "p-2" }, [
+                  _c("strong", [_vm._v(_vm._s(message.user.name))]),
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(message.message) +
+                      "\n                    "
+                  )
+                ])
+              }),
+              0
+            )
+          ]
+        ),
         _vm._v(" "),
         _c("input", {
           directives: [
