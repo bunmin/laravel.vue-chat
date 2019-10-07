@@ -4,9 +4,6 @@ This is a Chat system example application built with the [Laravel WebSockets](ht
 
 With some modification from original source : https://github.com/qirolab/Laravel-WebSockets-Chat-Example.
 
-## Youtube Original Resource
-[![Real-time Chat system](http://i3.ytimg.com/vi/H_4UubWE9NQ/hqdefault.jpg)](https://www.youtube.com/watch?v=H_4UubWE9NQ&list=PL1TrjkMQ8UbWfFUCimQ50CdrR_J7QvEFW)
-
 ## Usage
 
 1. Clone this repository
