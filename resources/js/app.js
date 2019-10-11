@@ -8,8 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import VueChatScroll from 'vue-chat-scroll'
-Vue.use(VueChatScroll)
+// import VueChatScroll from 'vue-chat-scroll'
+// Vue.use(VueChatScroll)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
