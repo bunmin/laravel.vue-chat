@@ -8,6 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+const VueUploadComponent = require('vue-upload-component')
+Vue.component('file-upload', VueUploadComponent)
 // import VueChatScroll from 'vue-chat-scroll'
 // Vue.use(VueChatScroll)
 

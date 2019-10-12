@@ -25,9 +25,17 @@ class ChatsController extends Controller
 
     public function sendMessage(Request $request)
     {
-        $message = auth()->user()->messages()->create([
-            'message' => $request->message
-        ]);
+        if(request()->has('file')){
+            $filename = request('file')->store('chat');
+            $message = auth()->user()->messages()->create([
+                'message' => $request->message,
+                'file' => $filename,
+            ]);
+        }else{
+            $message = auth()->user()->messages()->create([
+                'message' => $request->message
+            ]);
+        }
 
         broadcast(new MessageSent($message->load('user')))->toOthers();
 
